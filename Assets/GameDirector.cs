@@ -24,14 +24,21 @@ public class GameDirector : MonoBehaviour
     {
         float speed = car.GetComponent<CarController>().speed;
         bool notsecond = car.GetComponent<CarController>().notsecond;
-        float length = this.flag.transform.position.x - this.car.transform.position.x;
-        if (speed < 0.1f && !notsecond || length <= -0.1)
+        float length = this.flag.transform.position.x - this.car.transform.position.x - 1.64f;
+        if (length <= -5.0f || (length <= -1.0f && speed < 0.05f))
+        {
+            this.distance.GetComponent<Text>().text = "ゲームオーバー";
+        }
+        else if (speed < 0.1f && !notsecond || length <= -0.1f)
         {
             this.distance.GetComponent<Text>().text = "ゴールまで" + length.ToString("F2") + "m";
-        } else if (notsecond)
+        } 
+        else if (notsecond)
         {
             this.distance.GetComponent<Text>().text = "ゴールまで" + length.ToString("F2") + "m";
-        } else
+        } 
+
+        else
         {
             this.distance.GetComponent<Text>().text = "";
         }

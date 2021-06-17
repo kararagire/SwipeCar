@@ -22,6 +22,7 @@ public class CarController : MonoBehaviour
         {
             this.startPos = Input.mousePosition;
             startTime = Time.time;
+            GetComponent<AudioSource>().Play();
         }
         else if (Input.GetMouseButtonUp(0) && notsecond)
         {
