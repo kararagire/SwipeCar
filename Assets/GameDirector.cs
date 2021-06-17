@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class GameDirector : MonoBehaviour
 {
     GameObject car;
@@ -28,21 +28,39 @@ public class GameDirector : MonoBehaviour
         if (length <= -5.0f || (length <= -1.0f && speed < 0.05f))
         {
             this.distance.GetComponent<Text>().text = "ゲームオーバー";
+            if (Input.GetMouseButtonUp(0))
+            {
+                SceneManager.LoadScene("GameScene");
+            }
         }
-        else if (speed < 0.1f && !notsecond || length <= -0.1f)
+        else if (length >= 0 && length <= 1.0f && speed < 0.001f)
         {
-            this.distance.GetComponent<Text>().text = "ゴールまで" + length.ToString("F2") + "m";
-        } 
+            this.distance.GetComponent<Text>().text = "ゲームクリア！";
+            if (Input.GetMouseButtonUp(0))
+            {
+                SceneManager.LoadScene("GameScene");
+            }
+        }
         else if (notsecond)
         {
             this.distance.GetComponent<Text>().text = "ゴールまで" + length.ToString("F2") + "m";
+        }
+        else if (speed < 0.001f)
+        {
+            this.distance.GetComponent<Text>().text = "惜しい！";
+            if (Input.GetMouseButtonUp(0))
+            {
+                SceneManager.LoadScene("GameScene");
+            }
+        }
+        else if (speed < 0.1f && !notsecond || length <= 3.0f)
+        {
+            this.distance.GetComponent<Text>().text = "ゴールまで" + length.ToString("F2") + "m";
         } 
-
         else
         {
             this.distance.GetComponent<Text>().text = "";
         }
-
 
     }
 }

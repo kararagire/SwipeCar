@@ -34,6 +34,11 @@ public class CarController : MonoBehaviour
             this.speed = swipeLength / (swipeTime * 8500.0f);
             notsecond = false;
         }
+        if (this.speed < 0)
+        {
+            this.speed = 0;
+            notsecond = true;
+        }
         transform.Translate(this.speed, 0, 0);
         this.speed *= 0.98f;
 
